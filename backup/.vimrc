@@ -75,8 +75,6 @@ nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR> " 用空格�
 set ts=4
 set expandtab
 set shiftwidth=4
-" shift+v 选中多行后，键入//快速注释多行
-vmap // :s:^://<CR>
 
 " 关闭buffer但不关闭窗口
 map <leader>q :bn<bar>bd#<CR>
@@ -121,6 +119,15 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
+
+" 快速注释多行
+Plug 'preservim/nerdcommenter'
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
 
 " 快速跳转
 Plug 'easymotion/vim-easymotion'
