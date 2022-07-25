@@ -120,6 +120,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
 
+" Normal模式自动切换中文
+set ttimeoutlen=0
+Plug 'rlue/vim-barbaric'
+
 " 快速注释多行
 Plug 'preservim/nerdcommenter'
 " Create default mappings
