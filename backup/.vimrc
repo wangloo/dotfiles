@@ -133,16 +133,6 @@ let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
 
-" 快速跳转
-Plug 'easymotion/vim-easymotion'
-" two char search(in buffer/over buffer)
-"nmap <leader>s <Plug>(easymotion-s2) 
-nmap <leader>f <Plug>(easymotion-overwin-f2)
-" Turn on case-insensitive feature
-let g:EasyMotion_smartcase = 1
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
 
 " 显示已经打开的 buffer/tab
 Plug 'vim-airline/vim-airline'
