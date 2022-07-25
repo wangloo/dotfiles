@@ -171,6 +171,9 @@ let g:buffergator_viewport_split_policy = 'R'
 " I want my own keymappings...
 let g:buffergator_suppress_keymaps = 1
 
+" Set max number of cached records
+let g:ctrlp_max_files = 100
+
 " Use a leader instead of the actual named binding
 nmap <leader>p :CtrlP<cr>
 " Easy bindings for its various modes
