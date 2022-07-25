@@ -263,3 +263,8 @@ Plug 'turbio/bracey.vim' " live preview of html and css
 " Initialize plugin system
 call plug#end()
 
+" ============ alias
+:command   Putdate put =strftime(\"%Y/%m/%d %T\")
+:cmap WQ   wq
+:cmap W    w
+" ===============================
