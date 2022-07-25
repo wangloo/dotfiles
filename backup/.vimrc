@@ -210,6 +210,7 @@ cnoreabbrev Ack Ack!
 Plug 'Valloric/YouCompleteMe'
 "let g:ycm_show_diagnostics_ui = 0  " disable error checking
 let g:ycm_enable_diagnostic_highlighting = 0  " disable error highlight
+let g:ycm_autoclose_preview_window_after_insertion = 1 "auto close preview window
 
 " Vim markdown
 Plug 'godlygeek/tabular' , { 'for': 'markdown' }
