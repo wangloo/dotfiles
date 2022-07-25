@@ -178,6 +178,34 @@ nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
 
+
+" excellent search
+Plug 'Yggdroot/LeaderF'
+let g:Lf_HideHelp = 1 " don't show the help in normal mode
+let g:Lf_UseVersionControlTool = 0 " don't refer git
+let g:Lf_ShortcutF = "<leader>ff"
+noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+" search content in open buffer
+noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+" search content in tags
+noremap <leader>fT :<C-U><C-R>=printf("Leaderf tag %s", "")<CR><CR>
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+
+" popup mode
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1 " preview showed in popup
+let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
+" preview search result in another popup
+let g:Lf_PreviewResult = {'Function': 1, 'BufTag': 1, 'tag': 1}
+
+
+" ack(replace grep)
+Plug 'mileszs/ack.vim'
+nnoremap <Leader>a :Ack!<Space>
+" Never jump to the first result.
+cnoreabbrev Ack Ack!
+
 " Configure autocomplete
 Plug 'Valloric/YouCompleteMe'
 "let g:ycm_show_diagnostics_ui = 0  " disable error checking
