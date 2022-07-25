@@ -3,3 +3,7 @@
 	email = cnwanglu@icloud.com
 [core]
 	editor = vim
+[log]
+	date = local
+[color]
+	ui = auto
