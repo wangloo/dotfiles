@@ -59,16 +59,16 @@ endif
 "DIY by wanglu
 set number
 "colorscheme darkblue
-set ruler " 打开状态栏标尺
+set ruler         " 打开状态栏标尺
 set softtabstop=4 " 使得按退格键时可以一次删掉 4 个空格
-set hlsearch " 搜索时高亮显示被找到的文本
-set smartindent " 开启新行时使用智能自动缩进
+set hlsearch      " 搜索时高亮显示被找到的文本
+set smartindent   " 开启新行时使用智能自动缩进
 set backspace=indent,eol,start " 不设定在插入状态无法用退格键和 Delete 键删除回车符
-set laststatus=2 " 显示状态栏 (默认值为 1, 无法显示状态栏)
+set laststatus=2  " 显示状态栏 (默认值为 1, 无法显示状态栏)
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ Ln\ %l,\ Col\ %c/%L%) " 设置在状态行显示的信息
-set foldenable " 开始折叠
+set foldenable    " 开始折叠
 set foldmethod=syntax " 设置语法折叠
-set foldcolumn=0 " 设置折叠区域的宽度
+set foldcolumn=0  " 设置折叠区域的宽度
 setlocal foldlevel=1 " 设置折叠层数为 1
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR> " 用空格键来开关折叠
 
