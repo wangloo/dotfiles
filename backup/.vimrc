@@ -79,6 +79,8 @@ set shiftwidth=4
 " 关闭buffer但不关闭窗口
 map <leader>q :bn<bar>bd#<CR>
 
+" 下方打开内部的terminal
+nmap <leader>t :belowright terminal<CR>
 
 call plug#begin()
 " The default plugin directory will be as follows:
