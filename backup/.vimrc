@@ -304,14 +304,14 @@ Plug 'preservim/nerdtree'
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 "autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
-
-" =============
 Plug 'mattn/emmet-vim' , { 'for': ['html', 'css'] } " html quick write
 let g:user_emmet_mergelines_key = '<C-y>]'
-
 Plug 'turbio/bracey.vim' " live preview of html and css
-" ===============================
-" Initialize plugin system
+
+Plug 'junegunn/vim-emoji'
+" Shortkey to automatically replace emoji_string with  actual emoji
+nnoremap <silent> <Leader>e :s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>:noh<CR>
+
 call plug#end()
 
 " ============ alias
