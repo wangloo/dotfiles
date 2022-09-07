@@ -91,6 +91,16 @@ autocmd bufnewfile *.c exe "1," . 10 . "g/date.*/s//date     " .strftime("%Y-%m-
 "autocmd Bufwritepre,filewritepre *.c exe "1," . 10 . "g/lastmod.*/s/lastmod.*/lastmod  " .strftime("%Y-%m-%d %T")
 "autocmd bufwritepost,filewritepost *.c execute "normal `lm"
 
+" visual sreach 
+xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
+function! s:VSetSearch(cmdtype)
+let temp = @s
+norm! gv"sy
+let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+let @s = temp
+endfunction
+
 call plug#begin()
 " The default plugin directory will be as follows:
 "   - Vim (Linux/macOS): '~/.vim/plugged'
@@ -100,7 +110,6 @@ call plug#begin()
 "   - e.g. `call plug#begin('~/.vim/plugged')`
 "   - Avoid using standard Vim directory names like 'plugin'
 
-" Make sure you use single quotes
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
@@ -164,7 +173,6 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>bl :ls<CR>
 " gb 列出当前打开的所有buffer，并接收要跳转buffer输入
 nnoremap gb :ls<cr>:b<space> 
-
 
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 " Setup some default ignores
