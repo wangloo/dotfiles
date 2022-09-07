@@ -82,6 +82,15 @@ map <leader>q :bn<bar>bd#<CR>
 " 下方打开内部的terminal
 nmap <leader>t :belowright terminal<CR>
 
+" Insert file-header for C/C++ file
+autocmd bufnewfile *.c so /home/soben/mytool/c_header
+autocmd bufnewfile *.c exe "1," . 10 . "g/file.*/s//file     " .expand("%")
+autocmd bufnewfile *.c exe "1," . 10 . "g/author.*/s//author   Wang Lu"
+autocmd bufnewfile *.c exe "1," . 10 . "g/date.*/s//date     " .strftime("%Y-%m-%d")
+"autocmd Bufwritepre,filewritepre *.c execute "normal mlm"
+"autocmd Bufwritepre,filewritepre *.c exe "1," . 10 . "g/lastmod.*/s/lastmod.*/lastmod  " .strftime("%Y-%m-%d %T")
+"autocmd bufwritepost,filewritepost *.c execute "normal `lm"
+
 call plug#begin()
 " The default plugin directory will be as follows:
 "   - Vim (Linux/macOS): '~/.vim/plugged'
