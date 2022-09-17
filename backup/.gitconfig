@@ -5,5 +5,6 @@
 	editor = vim
 [log]
 	date = local
+	decorate = yes
 [color]
 	ui = auto
