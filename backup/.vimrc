@@ -293,6 +293,21 @@ nnoremap <silent> <Leader>e :s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0)
 call plug#end()
 
 " ==== Commands ================================================================
+command  Putdate put =strftime('%Y/%m/%d %T')
+command  Showdate echo 'Current time is [' . strftime('%Y/%m/%d %T')']'
+command  Gcc   !set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" ;
+command  -nargs=* GccAndRun  !set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" ;./$1 <args>
+command  GccAndGdb  !set $1 `echo "%" | sed 's/\.c//g'` ;gcc -g -o $1 "%" ;gdb $1
+" Simple version of `:s`
+command  -nargs=+ Sub call Substitute(<f-args>)
+function! Substitute( ... )
+    if a:0 != 2
+        echo "Need two args"
+        return
+    endif
+    execute printf('%%substitute/%s/%s/g', a:1, a:2)
+endfunction
+
 command IndentOff setl noai nocin nosi indentexpr=""
 command IndentOn  setl ai cin si  "indentexpr can't be re-enabled.
 command IndentStatus set ai? si? cin? indentexpr?
