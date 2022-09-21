@@ -46,9 +46,10 @@ set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
 set incsearch		" Incremental search
-set autoindent      " Auto indent for all file type
+set smartindent     " 开启新行时使用智能自动缩进
+set cindent
 "set autowrite		" Automatically save before commands like :next and :make
-set hidden		" Hide buffers when they are abandoned
+set hidden		    " Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes)
 
 " Source a global configuration file if available
@@ -56,14 +57,14 @@ if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
-"DIY by wanglu
+" DIY by wanglu
 set number
 "colorscheme darkblue
 set ruler         " 打开状态栏标尺
 set softtabstop=4 " 使得按退格键时可以一次删掉 4 个空格
 set hlsearch      " 搜索时高亮显示被找到的文本
-set smartindent   " 开启新行时使用智能自动缩进
 set backspace=indent,eol,start " 不设定在插入状态无法用退格键和 Delete 键删除回车符
+set cpoptions+=$  " Show a `$` at the end of the changed text
 set laststatus=2  " 显示状态栏 (默认值为 1, 无法显示状态栏)
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ Ln\ %l,\ Col\ %c/%L%) " 设置在状态行显示的信息
 set foldenable    " 开始折叠
@@ -310,8 +311,11 @@ nnoremap <silent> <Leader>e :s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0)
 
 call plug#end()
 
-" ============ alias
-:command   Putdate put =strftime(\"%Y/%m/%d %T\")
-:cmap WQ   wq
-:cmap W    w
-" ===============================
+" ==== Commands ================================================================
+command IndentOff setl noai nocin nosi indentexpr=""
+command IndentOn  setl ai cin si  "indentexpr can't be re-enabled.
+command IndentStatus set ai? si? cin? indentexpr?
+" ===========================================================================
+nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
+cmap WQ  wq
+cmap W   w
