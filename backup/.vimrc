@@ -72,27 +72,31 @@ set foldmethod=syntax " 设置语法折叠
 set foldcolumn=0  " 设置折叠区域的宽度
 setlocal foldlevel=1 " 设置折叠层数为 1
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR> " 用空格键来开关折叠
-
+nnoremap <c-e> 10j
+nnoremap <c-y> 10k
+set showcmd " display ketstokes in statusline
 set ts=4
 set expandtab
 set shiftwidth=4
+autocmd Filetype sh setlocal shiftwidth=2 ts=2 softtabstop=2 expandtab
+autocmd Filetype python setlocal shiftwidth=2 ts=2 softtabstop=2 expandtab
 
 " 关闭buffer但不关闭窗口
-map <leader>q :bn<bar>bd#<CR>
+noremap <leader>q :bn<bar>bd#<CR>
 
 " 下方打开内部的terminal
-nmap <leader>t :belowright terminal<CR>
+noremap <leader>t :belowright terminal<CR>
 
 " Insert file-header for C/C++ file
-autocmd bufnewfile *.c so /home/soben/mytool/c_header
-autocmd bufnewfile *.c exe "1," . 10 . "g/file.*/s//file     " .expand("%")
-autocmd bufnewfile *.c exe "1," . 10 . "g/author.*/s//author   Wang Lu"
-autocmd bufnewfile *.c exe "1," . 10 . "g/date.*/s//date     " .strftime("%Y-%m-%d")
+" autocmd bufnewfile *.c so /home/soben/mytool/c_header
+" autocmd bufnewfile *.c exe "1," . 10 . "g/file.*/s//file     " .expand("%")
+" autocmd bufnewfile *.c exe "1," . 10 . "g/author.*/s//author   Wang Lu"
+" autocmd bufnewfile *.c exe "1," . 10 . "g/date.*/s//date     " .strftime("%Y-%m-%d")
 "autocmd Bufwritepre,filewritepre *.c execute "normal mlm"
 "autocmd Bufwritepre,filewritepre *.c exe "1," . 10 . "g/lastmod.*/s/lastmod.*/lastmod  " .strftime("%Y-%m-%d %T")
 "autocmd bufwritepost,filewritepost *.c execute "normal `lm"
 
-" visual sreach 
+" search text selected in visual mode
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
 function! s:VSetSearch(cmdtype)
@@ -101,6 +105,15 @@ norm! gv"sy
 let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
 let @s = temp
 endfunction
+
+" Move to the next buffer
+nmap <F6> :bn<cr>
+" Move to the previous buffer
+nmap <F5>  :bp<cr>
+" open a new empty buffer
+nmap <leader>n :enew<cr> 
+" gb 列出当前打开的所有buffer，并接收要跳转buffer输入
+nnoremap <leader>l :ls<cr>:b<space> 
 
 call plug#begin()
 " The default plugin directory will be as follows:
