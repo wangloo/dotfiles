@@ -124,39 +124,31 @@ call plug#begin()
 "   - e.g. `call plug#begin('~/.vim/plugged')`
 "   - Avoid using standard Vim directory names like 'plugin'
 
-
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-Plug 'junegunn/vim-easy-align'
-
-" Any valid git URL is allowed
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-
 " Multiple Plug commands can be written in a single line using | separators
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+" Start NERDTree. If a file is specified, move the cursor to its window.
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+"autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 " Using a non-default branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 let g:ycm_global_ycm_extra_conf = "~/.ycm_c_c++_conf.py"
-
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go', { 'tag': '*' }
-
-" Plugin options
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
+Plug '~/.vim/pack/tpope/start/surround'
 
 " Normal模式自动切换中文
-set ttimeoutlen=0
 Plug 'rlue/vim-barbaric'
+set ttimeoutlen=0
 
 " 快速注释多行
 Plug 'preservim/nerdcommenter'
@@ -167,33 +159,18 @@ let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
 
-
 " 显示已经打开的 buffer/tab
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 1     " Enable the list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
 set hidden  " 如果修改了一个buffer，就将其隐藏
 
-" open a new empty buffer
-nmap <leader>T :enew<cr> 
-" Move to the next buffer
-nmap <leader>l :bnext<CR>
-" Move to the previous buffer
-nmap <leader>h :bprevious<CR>
-" Close the current buffer and move to the previous one
-nmap <leader>bq :bp <BAR> bd #<CR>
-" Show all open buffers and their status
-nmap <leader>bl :ls<CR>
-" gb 列出当前打开的所有buffer，并接收要跳转buffer输入
-nnoremap gb :ls<cr>:b<space> 
-
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 " Setup some default ignores
-"let g:ctrlp_custom_ignore = {
-"  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
-"  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
-"\}
+let g:ctrlp_custom_ignore = {
+ \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+ \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+\}
 " Use the nearest .git directory as the cwd
 " This makes a lot of sense if you are working on a project that is in version
 " control. It also supports works with .svn, .hg, .bzr.
@@ -203,17 +180,15 @@ Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 let g:buffergator_viewport_split_policy = 'R'
 " I want my own keymappings...
 let g:buffergator_suppress_keymaps = 1
-
 " Set max number of cached records
 let g:ctrlp_max_files = 100
 
 " Use a leader instead of the actual named binding
-nmap <leader>p :CtrlP<cr>
+nnoremap <leader>p :CtrlP<cr>
 " Easy bindings for its various modes
-nmap <leader>bb :CtrlPBuffer<cr>
-nmap <leader>bm :CtrlPMixed<cr>
-nmap <leader>bs :CtrlPMRU<cr>
-
+nnoremap <leader>bb :CtrlPBuffer<cr>
+nnoremap <leader>bm :CtrlPMixed<cr>
+nnoremap <leader>bs :CtrlPMRU<cr>
 
 " excellent search
 Plug 'Yggdroot/LeaderF'
@@ -236,9 +211,8 @@ let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu S
 let g:Lf_PreviewResult = {'Function': 1, 'BufTag': 1, 'tag': 1}
 
 
-" ack(replace grep)
+" ack(ack/ack-grep need to be installed in system)
 Plug 'mileszs/ack.vim'
-nnoremap <Leader>a :Ack!<Space>
 " Never jump to the first result.
 cnoreabbrev Ack Ack!
 
@@ -309,14 +283,8 @@ let g:vimtex_compiler_latexmk_engines = {
 
 " 文件树
 "Plug 'ryanoasis/vim-devicons' 太复杂 等有时间再看
-Plug 'preservim/nerdtree'
 "Plug 'tiagofumo/vim-nerdtree-syntax-highlight' 太复杂 等有时间再看
 
-" Start NERDTree. If a file is specified, move the cursor to its window.
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-"autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 Plug 'junegunn/vim-emoji'
 " Shortkey to automatically replace emoji_string with  actual emoji
