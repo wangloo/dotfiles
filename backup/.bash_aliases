@@ -36,8 +36,12 @@ function cdplus() {
     [[ -z $pushed_dir ]] && return 2
   else
     pushed_dir=$1
+    if [[ ! -d $pushed_dir ]]; then
+      echo "$pushed_dir is not a directory"
+      return 2;
+    fi
     # Preprocess
-    [[ -d $pushed_dir ]] && pushed_dir=$( realpath $1 | sed "s|$HOME|~|g")
+    pushed_dir=$( realpath $1 | sed "s|$HOME|~|g")
   fi
 
   case $pushed_dir in
