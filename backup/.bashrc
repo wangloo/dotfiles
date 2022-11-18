@@ -115,6 +115,8 @@ fi
 
 #source /usr/share/bash-completion/completions/hugo
 
-source ~/.bash_path
+if [ -f ~/.bash_path ]; then
+  source ~/.bash_path
+fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

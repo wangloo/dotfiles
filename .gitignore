@@ -3,4 +3,5 @@
 !.gitignore
 !*/
 !backup/**
+backup/.config/**
 !README.md
