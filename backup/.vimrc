@@ -115,6 +115,9 @@ nmap <leader>n :enew<cr>
 " gb 列出当前打开的所有buffer，并接收要跳转buffer输入
 nnoremap <leader>l :ls<cr>:b<space> 
 
+" set path to current dir when entering vim
+autocmd VimEnter * :set path=**
+
 call plug#begin()
 " The default plugin directory will be as follows:
 "   - Vim (Linux/macOS): '~/.vim/plugged'
@@ -215,6 +218,8 @@ let g:Lf_PreviewResult = {'Function': 1, 'BufTag': 1, 'tag': 1}
 Plug 'mileszs/ack.vim'
 " Never jump to the first result.
 cnoreabbrev Ack Ack!
+" Visual mode
+vnoremap <Leader>a y:Ack! <C-r>=fnameescape(@")<CR><CR>
 
 " Configure autocomplete
 Plug 'Valloric/YouCompleteMe'
@@ -296,7 +301,7 @@ call plug#end()
 command  Putdate put =strftime('%Y/%m/%d %T')
 command  Showdate echo 'Current time is [' . strftime('%Y/%m/%d %T')']'
 command  Gcc   !set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" ;
-command  -nargs=* GccAndRun  !set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" ;./$1 <args>
+command  -nargs=* GccAndGo  !set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" &&./$1 <args>
 command  GccAndGdb  !set $1 `echo "%" | sed 's/\.c//g'` ;gcc -g -o $1 "%" ;gdb $1
 " Simple version of `:s`
 command  -nargs=+ Sub call Substitute(<f-args>)
