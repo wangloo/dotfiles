@@ -303,7 +303,7 @@ command  Showdate echo 'Current time is [' . strftime('%Y/%m/%d %T')']'
 " command  Gcc   !set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" ;
 command  Gcc terminal ++shell set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%"
 command  -nargs=* GccAndGo terminal ++shell set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" && ./$1 <args>
-command  GccAndGo terminal ++shell set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" -g && gdb ./$1
+command  GccAndGdb terminal ++shell set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" -g && gdb ./$1
 " Simple version of `:s`
 command  -nargs=+ Sub call Substitute(<f-args>)
 function! Substitute( ... )
