@@ -297,12 +297,13 @@ nnoremap <silent> <Leader>e :s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0)
 
 call plug#end()
 
-" ==== Commands ================================================================
+" ==== my commands ================================================================
 command  Putdate put =strftime('%Y/%m/%d %T')
 command  Showdate echo 'Current time is [' . strftime('%Y/%m/%d %T')']'
-command  Gcc   !set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" ;
-command  -nargs=* GccAndGo  !set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" &&./$1 <args>
-command  GccAndGdb  !set $1 `echo "%" | sed 's/\.c//g'` ;gcc -g -o $1 "%" ;gdb $1
+" command  Gcc   !set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" ;
+command  Gcc terminal ++shell set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%"
+command  -nargs=* GccAndGo terminal ++shell set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" && ./$1 <args>
+command  GccAndGo terminal ++shell set $1 `echo "%" | sed 's/\.c//g'` ;gcc -o $1 "%" -g && gdb ./$1
 " Simple version of `:s`
 command  -nargs=+ Sub call Substitute(<f-args>)
 function! Substitute( ... )
@@ -316,7 +317,23 @@ endfunction
 command IndentOff setl noai nocin nosi indentexpr=""
 command IndentOn  setl ai cin si  "indentexpr can't be re-enabled.
 command IndentStatus set ai? si? cin? indentexpr?
-" ===========================================================================
+
+" ===== my mappings ==========================================================
 nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
-cmap WQ  wq
+nmap <F4> :terminal<CR>ls<CR>
+
+" nnoremap <silent> <F9> :terminal make run-qemu<CR>
+nnoremap <silent> <F9> :terminal ++shell make qemu-nox<CR>
+" nnoremap <silent> <F9> :terminal ++shell ./run.sh<CR>
+" nnoremap <silent> <F10> <C-w><C-w>make run-qemu<CR><C-a>xexit<CR>
+nnoremap <F10> :q!<CR>
+tnoremap <F10> <C-a>x
+tnoremap <Esc> <C-W>N
+
+" one of things I HATE about vim!
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
 cmap W   w
+cmap WQ  wq
+
