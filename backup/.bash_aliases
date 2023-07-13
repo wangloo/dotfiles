@@ -3,6 +3,9 @@ alias la='ls -A'
 alias l='ls -CF'
 alias cdf='cd $(find * -type d | fzf)'
 
+alias py3='python3'
+
+
 # Git
 function gitcheckout() {
   if [ ! -d ./.git ]; then
@@ -11,57 +14,53 @@ function gitcheckout() {
   fi
   git checkout $(git branch | fzf)
 }
+function gitdiff() {
+  if [ ! -d ./.git ]; then
+    echo "$(pwd) is NOT a git directory"
+    return 0
+  fi
+  git diff $(git status -s | sed 's/^...//g' | fzf) 
+}
+
 
 function mkcd() {
   # `$_` stands for last arguement of previous command
   mkdir -p "$@" && cd "$_";
 }
 
-# TODO LIST
-#   1. Check ~/.visited_dirs first
-# ✔ 2. Re-support the `cd -` function
-# ✔ 3. Don't record home-path 
-# ✔ 4. Set waterline
 function cdplus() {
-  local pushed_dir poped_dir
+  local in_dir
+  local push_dir
 
-  if [ $# -gt 1 ]; then
-    echo "Too many parameters"
-    return 3
-  fi
+  [ ! -f ~/.visited_dirs ] && { echo "please create ~/.visited_dirs first!"; return 1; }
 
-  # Without parameter trigger the magic trap
+  [ $# -gt 1 ] && { echo "too manyt parameters"; return 3; }
+
+
+  # trick: no parameter launch fzf!
   if [ $# -eq 0 ]; then
-    pushed_dir=$(cat ~/.visited_dirs | tac | head -n30 | fzf )
-    [[ -z $pushed_dir ]] && return 2
+    in_dir=$(cat ~/.visited_dirs | tac | head -n30 | fzf )
+    in_dir=$( echo "$in_dir" | sed "s|~|$HOME|g" )
   else
-    pushed_dir=$1
-    if [[ ! -d $pushed_dir ]]; then
-      echo "$pushed_dir is not a directory"
-      return 2;
-    fi
-    # Preprocess
-    pushed_dir=$( realpath $1 | sed "s|$HOME|~|g")
+    in_dir=$1
   fi
 
-  case $pushed_dir in
-    "~") 
-      # Push path excluding home-path
-      echo "[Debug] Do not push homepath"
-      ;;
-    '-') 
-      echo "[Debug] return to last visited dir"
-      pushed_dir=$(tail -n1 ~/.visited_dirs)
-      ;;
-    *)
-      # Remove any other occurence of this dir
-      echo "[Debug] pushed_dir = $pushed_dir"
-      sed -i "\:^$pushed_dir$:d" ~/.visited_dirs
-      echo "$pushed_dir" >> ~/.visited_dirs
-      ;;
-  esac
+  [[ ! -d "$in_dir" ]] && { echo ""$in_dir" is not a directory"; return 2; }
 
-  # Use `eval` because variableexpansion happens just once
-  eval builtin cd "$pushed_dir"
-  }
+
+  # update the recently visited dir
+  push_dir=$( realpath "$in_dir" | sed "s|$HOME|~|g" )
+  
+  if [[ "$push_dir" == "~" ]]; then
+    echo "[DEBUG] don't push homepath"
+  else
+    echo "[DEBUG] pushed_dir: "$push_dir""
+    sed -i "\:^$push_dir$:d" ~/.visited_dirs
+    echo "$push_dir" >> ~/.visited_dirs
+  fi
+
+  builtin cd "$in_dir"
+  return 0
+}
+
 alias cd=cdplus
