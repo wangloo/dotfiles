@@ -61,12 +61,17 @@ endif
 set number
 "colorscheme darkblue
 set ruler         " 打开状态栏标尺
-set softtabstop=4 " 使得按退格键时可以一次删掉 4 个空格
+set cursorline    " 当前行高亮显示
+set softtabstop=2 " 使得按退格键时可以一次删掉 4 个空格
 set hlsearch      " 搜索时高亮显示被找到的文本
 set backspace=indent,eol,start " 不设定在插入状态无法用退格键和 Delete 键删除回车符
 set cpoptions+=$  " Show a `$` at the end of the changed text
 set laststatus=2  " 显示状态栏 (默认值为 1, 无法显示状态栏)
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ Ln\ %l,\ Col\ %c/%L%) " 设置在状态行显示的信息
+" 搜索时显示count. 后面使用了vim-searchindex," 因为原生的经常显示[?/??]
+" set shortmess-=S   
+" 禁止显示欢迎信息
+set shortmess+=atI
 set foldenable    " 开始折叠
 set foldmethod=syntax " 设置语法折叠
 set foldcolumn=0  " 设置折叠区域的宽度
@@ -75,11 +80,12 @@ nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR> " 用空格�
 nnoremap <c-e> 10j
 nnoremap <c-y> 10k
 set showcmd " display ketstokes in statusline
-set ts=4
+set ts=2
 set expandtab
-set shiftwidth=4
+set shiftwidth=2
 autocmd Filetype sh setlocal shiftwidth=2 ts=2 softtabstop=2 expandtab
 autocmd Filetype python setlocal shiftwidth=2 ts=2 softtabstop=2 expandtab
+autocmd BufRead,BufNewFile *.h set ft=c
 
 " 关闭buffer但不关闭窗口
 noremap <leader>q :bn<bar>bd#<CR>
@@ -141,6 +147,12 @@ Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 " Using a non-default branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 let g:ycm_global_ycm_extra_conf = "~/.ycm_c_c++_conf.py"
+let g:syntastic_c_checkers=['make']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -322,12 +334,13 @@ command IndentStatus set ai? si? cin? indentexpr?
 nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
 nmap <F4> :terminal<CR>ls<CR>
 
-" nnoremap <silent> <F9> :terminal make run-qemu<CR>
-nnoremap <silent> <F9> :terminal ++shell make qemu-nox<CR>
-" nnoremap <silent> <F9> :terminal ++shell ./run.sh<CR>
+" nnoremap <silent> <F9> :terminal ++shell make clean && make && ./build/main<CR>
+nnoremap <silent> <F9> :terminal ++shell make clean && make monitor && ./run-qemu-virt.sh<CR>
+" nnoremap <silent> <F9> :terminal  ./run-qemu-virt.sh<CR>
+" nnoremap <silent> <F9> :terminal ++shell make qemu-nox CPUS=4 <CR>
 " nnoremap <silent> <F10> <C-w><C-w>make run-qemu<CR><C-a>xexit<CR>
 nnoremap <F10> :q!<CR>
-tnoremap <F10> <C-a>x
+tnoremap <F10> <C-A>x
 tnoremap <Esc> <C-W>N
 
 " one of things I HATE about vim!
