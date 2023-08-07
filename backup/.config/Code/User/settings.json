@@ -1,0 +1,89 @@
+{
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "editor.fontWeight": "400", // Regular
+  "editor.fontSize": 17,
+
+  "remote.SSH.remotePlatform": {
+    "192.168.1.111": "linux",
+    "192.168.1.110": "linux",
+    "192.168.1.200": "linux",
+    "116.62.17.105": "linux",
+    "192.168.1.128": "linux",
+    "192.168.1.16": "linux",
+    "192.168.1.188": "linux",
+    "192.168.0.188": "linux",
+    "192.168.0.79": "linux"
+  },
+  "git.suggestSmartCommit": false,
+
+  "python.analysis.autoImportCompletions": true,
+  "python.autoComplete.extraPaths": [
+    "c:\\users\\wl\\appdata\\local\\packages\\pythonsoftwarefoundation.python.3.9_qbz5n2kfra8p0\\localcache\\local-packages\\python39\\site-packages"
+  ],
+  "python.analysis.extraPaths": [
+    "c:\\users\\wl\\appdata\\local\\packages\\pythonsoftwarefoundation.python.3.9_qbz5n2kfra8p0\\localcache\\local-packages\\python39\\site-packages"
+  ],
+
+  "fileheader.cursorMode": {
+    //此为函数注释
+    "description": "",
+    "param": "",
+    "return": "",
+    "author": ""
+  },
+  "sync.gist": "5c99f79629133c0b32afe3dbc6af619b",
+  "bracketPairColorizer.depreciation-notice": false,
+  "bracketPairColorizer.colorMode": "Independent",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "workbench.colorTheme": "GitHub Light High Contrast",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Doxygen
+  // The prefix that is used for each comment line except for first and last.
+  "doxdocgen.c.commentPrefix": " * ",
+  // The template of the param Doxygen line(s) that are generated. If empty it won't get generated at all.
+  "doxdocgen.generic.paramTemplate": "@param [in] {param} ",
+  // The template of the return Doxygen line that is generated. If empty it won't get generated at all.
+  "doxdocgen.generic.returnTemplate": "@return     {type} ",
+  "[c]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "doxdocgen.file.customTag": [
+    "@level",
+  ],
+  // The order to use for the file comment. Values can be used multiple times. Valid values are shown in default setting.
+  "doxdocgen.file.fileOrder": [
+    "file",
+    // "author",
+    "brief",
+    // "version",
+    // "empty",
+    // "copyright",
+    // "empty",
+    "custom",
+    "date",
+  ],
+  "editor.dragAndDrop": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python",
+    "editor.formatOnType": true
+  },
+  "python.formatting.provider": "black",
+  "gitlens.views.commitDetails.files.layout": "list",
+  "editor.autoClosingBrackets": "never",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  // "editor.fontFamily": "Consolas",
+  // "editor.fontLigatures": false,
+  "explorer.autoReveal": false,
+  "clang-format.fallbackStyle": "",
+  "[cpp]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+
+  "workbench.editor.wrapTabs": true,
+}

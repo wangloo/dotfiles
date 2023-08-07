@@ -1,20 +1,27 @@
-# Dotfiles Management
+# 介绍
 
-Back up my dotfiles on ubuntu-20.04 with the help of [mackup](https://github.com/lra/mackup)
+借助 [mackup](https://github.com/lra/mackup)
+实现对 dotfiles 的快速备份和恢复。
 
-## Install and configure mackup
-See [here](https://github.com/lra/mackup/blob/master/README.md) for installation 
-and [here](https://github.com/lra/mackup/blob/master/doc/README.md) for configuation 
+此工程是我的[开发环境快速构建](https://wangloo.github.io/posts/tools/dev_env/)的支撑之一。
 
-## Clone this repository
+# 使用方法
 
-1. make sure in the home path.
-2. git clone
+拿到新机器后，按照下面的步骤来执行。
 
-## Add and Overwrite dotfiles
+## 安装 `mackup`
+先安装好 mackup, 按照官方文档即可:
 
-Assume you have configured `mackup` successfully, next step is restore 
+   - See [here](https://github.com/lra/mackup/blob/master/README.md) for installation
+   - and [here](https://github.com/lra/mackup/blob/master/doc/README.md) for configuation
+## Clone 本项目
+clone 本项目到本地**的 home 目录**！！
+
+## 恢复dotfiles
+
+Assume you have configured `mackup` successfully, next step is restore
 your backuped dotfiles.
+
 ```shell
 mackup restore
 ```
@@ -22,3 +29,7 @@ mackup restore
 After execute this, mackup will create softlinks of backup dotfiles.
 If there are existed files, you can choose overwrite it or keep the original
 files.
+
+> tips: 在做恢复、备份这些敏感操作之前，可以添加参数`-n`，会显示执行结果但并不实际执行
+
+> 其他的技巧请多看 mackup 官方文档，感谢 mackup!！
