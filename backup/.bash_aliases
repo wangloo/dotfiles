@@ -1,4 +1,4 @@
-alias ll='ls -alF'
+alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
 alias cdf='cd $(find * -type d | fzf)'
@@ -61,6 +61,23 @@ function cdplus() {
 
   builtin cd "$in_dir"
   return 0
+}
+
+function proxy() {
+    export http_proxy=http://127.0.0.1:7890
+    export https_proxy=$http_proxy
+    
+    # npm
+    npm config set proxy=http://127.0.0.1:7890
+    npm config set https-proxy http://127.0.0.1:7890
+    echo -e "proxy on!"
+}
+function unproxy(){
+    unset http_proxy https_proxy
+
+    npm config delete proxy
+    npm config delete https-proxy
+    echo -e "proxy off"
 }
 
 alias cd=cdplus
