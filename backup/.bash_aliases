@@ -64,7 +64,13 @@ function cdplus() {
     echo "[DEBUG] don't push homepath"
   else
     echo "[DEBUG] pushed_dir: "$push_dir""
-    sed -i "" "\:^$push_dir$:d" ~/.visited_dirs
+    # Macos has wired usage of "sed -i"
+    # https://stackoverflow.com/questions/25124969/sed-replacement-command-not-working-on-mac
+    if [ "$os" = "Darwin" ]; then
+      sed -i "" "\:^$push_dir$:d" ~/.visited_dirs
+    else
+      sed -i  "\:^$push_dir$:d" ~/.visited_dirs
+    fi
     echo "$push_dir" >> ~/.visited_dirs
   fi
 
