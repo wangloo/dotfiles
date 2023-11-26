@@ -112,3 +112,7 @@ fi
 
 source ~/.bash_aliases
 source ~/.bash_path
+
+if [ -e ~/.bash_local ]; then
+  source ~/.bash_local
+fi

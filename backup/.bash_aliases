@@ -1,3 +1,5 @@
+os=$(uname)
+
 alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -5,6 +7,13 @@ alias cdf='cd $(find * -type d | fzf)'
 
 alias py3='python3'
 
+
+# Macos don't has realpath
+if [ "$os" = "Darwin" ]; then
+  function realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+  }
+fi
 
 # Git
 function gitcheckout() {
@@ -55,7 +64,7 @@ function cdplus() {
     echo "[DEBUG] don't push homepath"
   else
     echo "[DEBUG] pushed_dir: "$push_dir""
-    sed -i "\:^$push_dir$:d" ~/.visited_dirs
+    sed -i "" "\:^$push_dir$:d" ~/.visited_dirs
     echo "$push_dir" >> ~/.visited_dirs
   fi
 
@@ -66,6 +75,7 @@ function cdplus() {
 function proxy() {
     export http_proxy=http://127.0.0.1:7890
     export https_proxy=$http_proxy
+    export all_proxy=socks5://127.0.0.1:7890
     
     # npm
     npm config set proxy=http://127.0.0.1:7890
@@ -73,11 +83,12 @@ function proxy() {
     echo -e "proxy on!"
 }
 function unproxy(){
-    unset http_proxy https_proxy
+    unset http_proxy https_proxy all_proxy
 
     npm config delete proxy
     npm config delete https-proxy
     echo -e "proxy off"
 }
+
 
 alias cd=cdplus

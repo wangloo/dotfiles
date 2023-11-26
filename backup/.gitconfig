@@ -8,3 +8,5 @@
 	decorate = yes
 [color]
 	ui = auto
+[http]
+	version = HTTP/1.1
