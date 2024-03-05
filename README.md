@@ -14,6 +14,10 @@
 
    - See [here](https://github.com/lra/mackup/blob/master/README.md) for installation
    - and [here](https://github.com/lra/mackup/blob/master/doc/README.md) for configuation
+>使用pip方式安装后，可能安装目录不在PATH中，需要手动添加。
+>```sh
+>export PATH=$HOME/.local/bin:$PATH
+>```
 ## Clone 本项目
 clone 本项目到本地**的 home 目录**！！
 
@@ -23,6 +27,9 @@ Assume you have configured `mackup` successfully, next step is restore
 your backuped dotfiles.
 
 ```shell
+# mackup运行需要依赖config文件，先将其拷贝到根目录
+# 在后续恢复的时候对其进行覆盖即可
+cp -r ~/dotfiles/backup/.mackup* ~
 mackup restore
 ```
 
