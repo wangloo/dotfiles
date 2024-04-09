@@ -1,3 +1,5 @@
+os_version=$(uname -s)
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -70,9 +72,12 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-plugins=(zsh-syntax-highlighting)
-plugins=(zsh-autosuggestions)
+plugins=(
+    git
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    rand-quote
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -115,3 +120,18 @@ source ~/.bash_aliases
 if [ -e ~/.bash_local ]; then
   source ~/.bash_local
 fi
+
+if [[ $os_version == "Darwin" ]]; then  # MACOS Config
+echo "Install config only for MacOS..."
+# Homebrew Config
+# Disable auto-update for every install
+export HOMEBREW_NO_AUTO_UPDATE=true
+# Change to tinghua mirrors
+export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+export HOMEBREW_PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"
+fi
+
+echo "All done:)"
