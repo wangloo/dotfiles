@@ -19,7 +19,7 @@ ZSH_THEME="robbyrussell"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -83,6 +83,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+[ -f ~/.bash_aliases ] && . ~/.bash_aliases
+[ -f ~/.bash_local ] &&  . ~/.bash_local
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -115,11 +117,13 @@ else
   PROMPT+='$ '
 fi
 
-source ~/.bash_aliases
+# HSTR configuration - add this to ~/.zshrc
+alias hh=hstr                    # hh to be alias for hstr
+setopt histignorespace           # skip cmds w/ leading space from history
+export HSTR_CONFIG=hicolor       # get more colors
+bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
+export HSTR_TIOCSTI=y
 
-if [ -e ~/.bash_local ]; then
-  source ~/.bash_local
-fi
 
 if [[ $os_version == "Darwin" ]]; then  # MACOS Config
 echo "Install config only for MacOS..."

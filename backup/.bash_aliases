@@ -60,10 +60,8 @@ function cdplus() {
   # update the recently visited dir
   push_dir=$( realpath "$in_dir" | sed "s|$HOME|~|g" )
   
-  if [[ "$push_dir" == "~" ]]; then
-    echo "[DEBUG] don't push homepath"
-  else
-    echo "[DEBUG] pushed_dir: "$push_dir""
+  if [[ "$push_dir" != "~" ]]; then
+    # echo "[DEBUG] pushed_dir: "$push_dir""
     # Macos has wired usage of "sed -i"
     # https://stackoverflow.com/questions/25124969/sed-replacement-command-not-working-on-mac
     if [ "$os" = "Darwin" ]; then
@@ -72,6 +70,8 @@ function cdplus() {
       sed -i  "\:^$push_dir$:d" ~/.visited_dirs
     fi
     echo "$push_dir" >> ~/.visited_dirs
+  # else
+    # echo "[DEBUG] don't push homepath"
   fi
 
   builtin cd "$in_dir"

@@ -8,7 +8,9 @@
 	decorate = yes
 [color]
 	ui = auto
-[http]
-	version = HTTP/1.1
 [pull]
 	ff = only
+[http]
+	postBuffer = 1048576000
+[https]
+	postBuffer = 524288000
