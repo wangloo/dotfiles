@@ -124,6 +124,10 @@ export HSTR_CONFIG=hicolor       # get more colors
 bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
 export HSTR_TIOCSTI=y
 
+# zsh disable share_history option by default，but oh-my-zsh enable it,
+# so put this setting after source .oh-my-zsh
+unsetopt share_history
+
 
 if [[ $os_version == "Darwin" ]]; then  # MACOS Config
 echo "Install config only for MacOS..."
@@ -137,5 +141,7 @@ export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebr
 export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
 export HOMEBREW_PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"
 fi
+
+export REPO_URL='https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/'
 
 echo "All done:)"
