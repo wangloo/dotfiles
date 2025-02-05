@@ -1,0 +1,6 @@
+term "screen-256color"
+altscreen on
+vbell off
+caption always "%?%F%{= bW}%:%{= wk}%? %-w%{= rW}%n %t%{-}%+w %=[%H] [%Y-%m-%d %c]"
+startup_message off
+defscrollback 10000
